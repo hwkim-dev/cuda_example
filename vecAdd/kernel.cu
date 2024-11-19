@@ -29,8 +29,8 @@ int main()
         return 1;
     }
     cudaDeviceReset();
+    
     int i = 0;
-
     do 
     {
         printf("%.1f, ", c[i]);
@@ -61,7 +61,7 @@ cudaError_t vecAdd(float* A_h, float* B_h, float* C_h, int n)
     cudaMemcpy(A_d, A_h, size, cudaMemcpyHostToDevice);
     cudaMemcpy(B_d, B_h, size, cudaMemcpyHostToDevice);
 
-   
+    //<<<dimGrid, dimBlock>>>
     vecAddKernel<<< ceil(n / 256.0), 256 >>>(A_d, B_d, C_d, n);
     
     cudaStatus = cudaGetLastError();
